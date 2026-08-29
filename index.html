@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أبو ندم | Abu Nadam - المنصة الرسمية لجميع القنوات والحسابات</title>
+    <meta name="description" content="المنصة الرسمية الموثقة لأبو ندم. جميع قنوات اليوتيوب، التليجرام، التيك توك، الديسكورد ومواقع التواصل في مكان واحد.">
+    <meta name="theme-color" content="#09090C">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { 500: '#D4AF37' }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#09090C] text-zinc-100 min-h-screen flex flex-col font-cairo selection:bg-amber-500 selection:text-black">
+
+    <!-- Top VIP Header -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-amber-500/10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center text-black font-black text-lg shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-base sm:text-lg tracking-wide gold-gradient-text">أبو ندم</h1>
+                    <p class="text-[10px] text-zinc-400">Abu Nadam Official</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div id="user-role-badge" class="hidden sm:block"></div>
+
+                <button id="admin-action-btn" onclick="openAdminDashboard()" class="hidden px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black text-xs font-black shadow-lg shadow-amber-500/20 hover:scale-105 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="hidden md:inline">لوحة المدير</span>
+                </button>
+
+                <button onclick="openAuthModal()" class="px-3.5 py-1.5 rounded-xl bg-zinc-900 border border-zinc-700 hover:border-amber-500/50 text-zinc-300 hover:text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-user"></i>
+                    <span id="user-display-name">تسجيل الدخول</span>
+                </button>
+
+                <button onclick="openShareModal()" class="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-700 hover:border-amber-500/50 text-amber-400 flex items-center justify-center text-sm hover:scale-105 transition-all" title="مشاركة المنصة">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Announcement Bar -->
+    <div id="announcement-container" class="bg-gradient-to-r from-amber-950/80 via-zinc-900 to-amber-950/80 border-b border-amber-500/20 py-2.5 px-4 hidden">
+        <div class="max-w-6xl mx-auto flex items-center gap-3">
+            <span class="px-2.5 py-0.5 rounded-md bg-amber-500 text-black text-[11px] font-black flex-shrink-0 flex items-center gap-1">
+                <i class="fa-solid fa-bullhorn animate-pulse"></i> إعلان هام
+            </span>
+            <div class="marquee-container flex-1 text-xs text-amber-200 font-medium">
+                <span id="announcement-text" class="marquee-content"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
+
+        <!-- Hero Profile Card -->
+        <section class="relative rounded-3xl overflow-hidden glass-panel border border-amber-500/20 shadow-2xl mb-10">
+            <div id="profile-banner" class="h-44 sm:h-56 w-full bg-cover bg-center relative">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#09090C]"></div>
+            </div>
+
+            <div class="relative px-6 pb-8 pt-0 -mt-16 sm:-mt-20 flex flex-col sm:flex-row items-center sm:items-end gap-6 text-center sm:text-right">
+                <div class="vip-avatar-frame flex-shrink-0">
+                    <img id="profile-avatar" src="" alt="أبو ندم" class="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-[#09090C] shadow-2xl">
+                </div>
+
+                <div class="flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <div class="flex items-center justify-center sm:justify-start gap-2.5 flex-wrap">
+                                <h2 id="profile-name" class="text-2xl sm:text-3xl font-black gold-gradient-text tracking-wide">أبو ندم | Abu Nadam</h2>
+                                <span id="profile-vip-badge" class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-black vip-badge-pulse flex items-center gap-1.5"></span>
+                            </div>
+                            <p id="profile-tagline" class="text-xs sm:text-sm text-amber-400/90 font-semibold mt-1"></p>
+                        </div>
+                        <div id="profile-location" class="text-xs text-zinc-400 flex items-center justify-center sm:justify-end gap-1.5 bg-zinc-900/80 px-3 py-1.5 rounded-xl border border-zinc-800"></div>
+                    </div>
+                    <p id="profile-bio" class="text-xs sm:text-sm text-zinc-300 mt-4 leading-relaxed max-w-3xl"></p>
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-800/80 bg-zinc-950/60 grid grid-cols-3 divide-x divide-x-reverse divide-zinc-800/80 text-center py-3.5">
+                <div>
+                    <span class="block text-lg sm:text-xl font-black text-amber-400 font-mono">+10</span>
+                    <span class="text-[11px] text-zinc-400">قنوات وحسابات رسمية</span>
+                </div>
+                <div>
+                    <span class="block text-lg sm:text-xl font-black text-white font-mono">+2.5M</span>
+                    <span class="text-[11px] text-zinc-400">إجمالي المتابعين</span>
+                </div>
+                <div>
+                    <span class="block text-lg sm:text-xl font-black text-emerald-400 font-mono">100%</span>
+                    <span class="text-[11px] text-zinc-400">موثق ومعتمد رسمي</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Categories -->
+        <section class="mb-8 space-y-4">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="relative w-full sm:max-w-md">
+                    <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                    <input type="text" id="search-input" placeholder="ابحث عن قناة، حساب، منصة، أو كلمة مفتاحية..." class="w-full pl-10 pr-11 py-3 bg-zinc-900/90 border border-zinc-800 focus:border-amber-500/70 rounded-2xl text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all shadow-inner">
+                    <button onclick="clearFilters()" class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 text-xs p-1" title="مسح">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+                    <span id="visible-accounts-count" class="text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-2 rounded-xl">
+                        جاري التحميل...
+                    </span>
+
+                    <div class="flex items-center bg-zinc-900 border border-zinc-800 rounded-xl p-1 gap-1">
+                        <button id="view-btn-grid" onclick="setViewMode('grid')" class="p-2 rounded-lg bg-amber-500 text-black font-bold text-xs transition-all" title="عرض شبكي">
+                            <i class="fa-solid fa-grip"></i>
+                        </button>
+                        <button id="view-btn-list" onclick="setViewMode('list')" class="p-2 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white text-xs transition-all" title="عرض قائمة">
+                            <i class="fa-solid fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="categories-container" class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none"></div>
+        </section>
+
+        <!-- Accounts Grid -->
+        <section id="accounts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-zinc-800/80 bg-zinc-950/80 py-8 px-4 text-center">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
+            <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-amber-500 text-black flex items-center justify-center font-bold text-xs">أ</span>
+                <span class="font-bold text-white">منصة أبو ندم الرسمية VIP</span>
+                <span>• جميع الحقوق محفوظة © 2026</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="openAuthModal('admin')" class="hover:text-amber-400 transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-shield-halved text-amber-500"></i> دخول المدير
+                </button>
+                <span>|</span>
+                <button onclick="openShareModal()" class="hover:text-amber-400 transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-qrcode text-amber-500"></i> الباركود والمشاركة
+                </button>
+                <span>|</span>
+                <a href="https://github.com" target="_blank" class="hover:text-amber-400 transition-colors flex items-center gap-1">
+                    <i class="fa-brands fa-github text-white"></i> GitHub Ready
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Dock -->
+    <div class="fixed bottom-6 left-6 z-30 flex flex-col gap-2.5">
+        <button id="scroll-top-btn" onclick="scrollToTop()" class="w-12 h-12 rounded-2xl bg-zinc-900 border border-amber-500/40 text-amber-400 shadow-2xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-amber-500 hover:text-black hover:scale-110" title="للأعلى">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        <button onclick="openShareModal()" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-yellow-400 text-black shadow-xl shadow-amber-500/25 flex items-center justify-center text-base font-bold transition-all hover:scale-110" title="مشاركة المنصة">
+            <i class="fa-solid fa-share-nodes"></i>
+        </button>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-700/80 rounded-3xl max-w-md w-full p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center">
+                        <i class="fa-solid fa-id-badge"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-white">تسجيل الدخول والأدوار</h3>
+                </div>
+                <button onclick="closeAuthModal()" class="w-8 h-8 rounded-full bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-3 gap-1.5 p-1 bg-zinc-950 rounded-2xl mb-6 border border-zinc-800">
+                <button id="tab-btn-guest" onclick="switchAuthTab('guest')" class="py-2 px-2 text-xs font-bold rounded-xl transition-all">
+                    <i class="fa-solid fa-eye block mb-1 text-sm"></i> زائر فوري
+                </button>
+                <button id="tab-btn-email" onclick="switchAuthTab('email')" class="py-2 px-2 text-xs font-bold rounded-xl transition-all">
+                    <i class="fa-solid fa-envelope block mb-1 text-sm"></i> بالبريد
+                </button>
+                <button id="tab-btn-admin" onclick="switchAuthTab('admin')" class="py-2 px-2 text-xs font-bold rounded-xl transition-all">
+                    <i class="fa-solid fa-crown block mb-1 text-sm"></i> المدير
+                </button>
+            </div>
+
+            <!-- Guest Section -->
+            <div id="auth-section-guest" class="space-y-4">
+                <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 text-center">
+                    <div class="w-14 h-14 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-2xl mb-3">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-base">دخول سريع كزائر</h4>
+                    <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+                        تصفح فوري لكافة القنوات والحسابات، مع إمكانية البحث والفلترة وإضافة الحسابات إلى المفضلة بدون الحاجة لكتابة بريد أو كلمة مرور.
+                    </p>
+                </div>
+                <button onclick="loginAsGuest()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-extrabold text-sm shadow-lg shadow-amber-500/25 hover:scale-[1.02] transition-all">
+                    تأكيد الدخول كزائر 🚀
+                </button>
+            </div>
+
+            <!-- Email Section -->
+            <div id="auth-section-email" class="space-y-4 hidden">
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1.5">اسمك أو اللقب:</label>
+                        <input type="text" id="viewer-name-input" placeholder="مثال: ناصر، أحمد، فهد..." class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1.5">البريد الإلكتروني:</label>
+                        <input type="email" id="viewer-email-input" placeholder="name@example.com" class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-sm text-white focus:outline-none">
+                    </div>
+                </div>
+                <button onclick="loginWithEmail(document.getElementById('viewer-email-input').value, document.getElementById('viewer-name-input').value)" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-extrabold text-sm shadow-lg shadow-blue-500/25 hover:scale-[1.02] transition-all">
+                    تسجيل الدخول بالمشاهد ✨
+                </button>
+            </div>
+
+            <!-- Admin Section -->
+            <div id="auth-section-admin" class="space-y-4 hidden">
+                <div class="p-3.5 rounded-2xl bg-amber-950/30 border border-amber-500/30 text-center">
+                    <p class="text-xs text-amber-200 font-semibold">
+                        👑 منطقة مخصصة لأبو ندم لإدارة القنوات والتحكم الكامل بالمنصة.
+                    </p>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-zinc-300 mb-1.5">الرمز السري للمدير (PIN):</label>
+                    <input type="password" id="admin-pin-input" placeholder="1234" class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-sm text-white focus:outline-none text-center tracking-widest text-lg font-mono">
+                    <p class="text-[11px] text-zinc-500 mt-1">الرمز الافتراضي للتجربة: <span class="text-amber-400 font-bold font-mono">1234</span></p>
+                </div>
+                <button onclick="loginAsAdmin(document.getElementById('admin-pin-input').value)" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-extrabold text-sm shadow-lg shadow-amber-500/25 hover:scale-[1.02] transition-all">
+                    فتح لوحة تحكم المدير 👑
+                </button>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-400">
+                <span>تغيير الحساب؟</span>
+                <button onclick="logout()" class="text-red-400 hover:underline font-bold">
+                    تسجيل الخروج والعودة كزائر
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="admin-dashboard-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-2 sm:p-4">
+        <div class="bg-zinc-950 border border-amber-500/30 rounded-3xl max-w-4xl w-full h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+            
+            <div class="px-6 py-4 border-b border-zinc-800 bg-zinc-900/90 flex items-center justify-between gap-4 flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-600 text-black flex items-center justify-center text-lg font-black shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black text-white">لوحة تحكم المدير | أبو ندم</h3>
+                        <p class="text-[11px] text-zinc-400">التحكم الشامل بالحسابات، القنوات، الإعلانات والإحصائيات</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminDashboard()" class="w-9 h-9 rounded-xl bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="px-6 py-3 border-b border-zinc-800/80 bg-zinc-900/50 flex items-center gap-2 overflow-x-auto scrollbar-none flex-shrink-0">
+                <button id="admin-tab-btn-accounts" onclick="switchAdminTab('accounts')" class="px-4 py-2.5 rounded-xl font-bold transition-all text-black bg-gradient-to-r from-amber-400 to-yellow-500 shadow-md text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i> إدارة القنوات والحسابات
+                </button>
+                <button id="admin-tab-btn-profile" onclick="switchAdminTab('profile')" class="px-4 py-2.5 rounded-xl font-medium transition-all text-zinc-400 hover:text-white text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i> الملف التعريفي والإعلانات
+                </button>
+                <button id="admin-tab-btn-analytics" onclick="switchAdminTab('analytics')" class="px-4 py-2.5 rounded-xl font-medium transition-all text-zinc-400 hover:text-white text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line"></i> الإحصائيات
+                </button>
+                <button id="admin-tab-btn-backup" onclick="switchAdminTab('backup')" class="px-4 py-2.5 rounded-xl font-medium transition-all text-zinc-400 hover:text-white text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> النسخ والنشر (GitHub)
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                <!-- 1. Accounts -->
+                <div id="admin-tab-content-accounts" class="space-y-4">
+                    <div class="flex items-center justify-between gap-4">
+                        <h4 class="font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-cubes text-amber-400"></i> قائمة القنوات والحسابات
+                        </h4>
+                        <button onclick="openAddAccountModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-extrabold text-xs shadow-lg shadow-amber-500/20 hover:scale-105 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> إضافة حساب / قناة جديدة
+                        </button>
+                    </div>
+                    <div id="admin-accounts-list" class="space-y-3"></div>
+                </div>
+
+                <!-- 2. Profile -->
+                <div id="admin-tab-content-profile" class="hidden space-y-5">
+                    <form onsubmit="saveProfileSettingsFromForm(event)" class="space-y-4 max-w-2xl">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-zinc-300 mb-1.5">الاسم الظاهر:</label>
+                                <input type="text" id="profile-name-input" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-zinc-300 mb-1.5">اللقب / التاج لاين:</label>
+                                <input type="text" id="profile-tagline-input" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-300 mb-1.5">النبذة التعريفية (Bio):</label>
+                            <textarea id="profile-bio-input" rows="3" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-sm text-white focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-zinc-300 mb-1.5">رابط صورة البروفيل (Avatar URL):</label>
+                                <input type="url" id="profile-avatar-input" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-zinc-300 mb-1.5">رابط صورة الغلاف (Banner URL):</label>
+                                <input type="url" id="profile-banner-input" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-zinc-300 mb-1.5">نص شارة التوثيق VIP:</label>
+                                <input type="text" id="profile-badge-input" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-zinc-300 mb-1.5">الموقع الجغرافي / الدولة:</label>
+                                <input type="text" id="profile-location-input" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-zinc-300 mb-1.5">الرمز السري للمدير (PIN):</label>
+                                <input type="text" id="profile-pin-input" class="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none font-mono">
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <label class="text-xs font-bold text-amber-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-bullhorn"></i> شريط الأخبار والتنبيهات العاجلة
+                                </label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="profile-announcement-toggle" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+                                </label>
+                            </div>
+                            <input type="text" id="profile-announcement-input" placeholder="اكتب نص الإعلان الذي سيظهر في الشريط العلوي للمتابعين..." class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                        </div>
+
+                        <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-extrabold text-sm shadow-lg shadow-amber-500/20 hover:scale-[1.02] transition-all">
+                            حفظ كافة التعديلات 💾
+                        </button>
+                    </form>
+                </div>
+
+                <!-- 3. Analytics -->
+                <div id="admin-tab-content-analytics" class="hidden space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-zinc-400">إجمالي الزيارات للمنصة</span>
+                                <i class="fa-solid fa-users text-amber-400"></i>
+                            </div>
+                            <span id="stat-total-views" class="text-3xl font-black text-white font-mono">0</span>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-zinc-400">إجمالي النقرات على القنوات</span>
+                                <i class="fa-solid fa-arrow-pointer text-blue-400"></i>
+                            </div>
+                            <span id="stat-total-clicks" class="text-3xl font-black text-amber-400 font-mono">0</span>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-zinc-400">عدد الحسابات المضافة</span>
+                                <i class="fa-solid fa-link text-emerald-400"></i>
+                            </div>
+                            <span id="stat-total-accounts" class="text-3xl font-black text-white font-mono">0</span>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800 space-y-4">
+                        <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-ranking-star text-amber-400"></i> أكثر القنوات زيارة ونقراً من المتابعين
+                        </h4>
+                        <div id="admin-top-accounts-list" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- 4. Backup & GitHub -->
+                <div id="admin-tab-content-backup" class="hidden space-y-6">
+                    <div class="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800 space-y-4">
+                        <h4 class="font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk text-amber-400"></i> النسخ الاحتياطي واستعادة البيانات
+                        </h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            يمكنك تنزيل ملف JSON يحتوي على كافة قنواتك وإعداداتك لحفظها على جهازك، أو استيرادها في أي جهاز آخر بنقرة واحدة.
+                        </p>
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <button onclick="exportDataJSON()" class="px-4 py-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20 font-bold text-xs flex items-center gap-2">
+                                <i class="fa-solid fa-download"></i> تصدير البيانات (Export JSON)
+                            </button>
+                            
+                            <label class="px-4 py-2.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 font-bold text-xs flex items-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-upload"></i> استيراد البيانات (Import JSON)
+                                <input type="file" accept=".json" onchange="importDataJSON(event)" class="hidden">
+                            </label>
+
+                            <button onclick="confirmResetData()" class="px-4 py-2.5 rounded-xl bg-red-500/10 text-red-400 border border-red-500/30 hover:bg-red-500/20 font-bold text-xs flex items-center gap-2">
+                                <i class="fa-solid fa-arrows-rotate"></i> إعادة تعيين للافتراضي
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-zinc-900/80 border border-amber-500/30 space-y-4">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-brands fa-github text-2xl text-white"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-base">دليل النشر المجاني على GitHub Pages 🚀</h4>
+                                <p class="text-[11px] text-zinc-400">موقعك جاهز 100% ليعمل على استضافة GitHub المجانية في دقيقتين</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 text-xs text-zinc-300">
+                            <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                                <span class="font-bold text-amber-400 block mb-1">الخطوة 1: إنشاء مستودع جديد على GitHub</span>
+                                <p class="text-zinc-400">ادخل على حسابك في GitHub وأنشئ Repository جديد باسم مثلاً: <code class="text-amber-300">abu-nadam-links</code>.</p>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                                <span class="font-bold text-amber-400 block mb-1">الخطوة 2: رفع ملفات المشروع</span>
+                                <p class="text-zinc-400">ارفع كافة ملفات هذا المجلد (index.html, css, js) إلى المستودع.</p>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                                <span class="font-bold text-amber-400 block mb-1">الخطوة 3: تفعيل GitHub Pages</span>
+                                <p class="text-zinc-400">ادخل على <strong>Settings</strong> > <strong>Pages</strong> > اختر Branch: <code class="text-amber-300">main</code> واضغط <strong>Save</strong>. سيصبح موقعك متاحاً برابط مجاني فخم فوراً!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Editor Modal -->
+    <div id="account-editor-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-700/80 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative overflow-hidden">
+            <div class="flex items-center justify-between mb-5">
+                <h3 id="account-editor-title" class="text-base font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-amber-400"></i> إضافة حساب أو قناة جديدة
+                </h3>
+                <button onclick="closeAccountEditorModal()" class="w-8 h-8 rounded-full bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="account-editor-form" onsubmit="saveAccountFromForm(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1">المنصة:</label>
+                        <select id="acc-platform-input" onchange="onPlatformSelectChange(this.value)" class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                            <option value="youtube">يوتيوب (YouTube)</option>
+                            <option value="telegram">تليجرام (Telegram)</option>
+                            <option value="tiktok">تيك توك (TikTok)</option>
+                            <option value="discord">ديسكورد (Discord)</option>
+                            <option value="instagram">انستغرام (Instagram)</option>
+                            <option value="kick">كيك (Kick)</option>
+                            <option value="twitch">تويتش (Twitch)</option>
+                            <option value="x-twitter">إكس / تويتر (X)</option>
+                            <option value="whatsapp">واتساب (WhatsApp)</option>
+                            <option value="email">بريد إلكتروني (Email)</option>
+                            <option value="custom">مخصص / أخرى</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1">التصنيف:</label>
+                        <select id="acc-category-input" class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                            <option value="video">قنوات الفيديو</option>
+                            <option value="streaming">البث المباشر</option>
+                            <option value="social">التواصل الاجتماعي</option>
+                            <option value="community">المجتمعات والجروبات</option>
+                            <option value="vip">التواصل والخاص</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-zinc-300 mb-1">عنوان القناة / الحساب:</label>
+                    <input type="text" id="acc-title-input" required placeholder="مثال: قناة اليوتيوب الرسمية" class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-zinc-300 mb-1">الرابط المباشر (URL):</label>
+                    <input type="url" id="acc-url-input" required placeholder="https://..." class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none text-left" dir="ltr">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-zinc-300 mb-1">نبذة سريعة أو وصف مختصر:</label>
+                    <input type="text" id="acc-subtitle-input" placeholder="مثال: فيديوهات يومية ومسابقات وجوائز" class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1">عدد المتابعين / المشتركين:</label>
+                        <input type="text" id="acc-followers-input" placeholder="مثال: +500K مشترك" class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1">شارة مميزة (Badge):</label>
+                        <input type="text" id="acc-badge-input" placeholder="مثال: القناة الرسمية 🔥" class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1">أيقونة FontAwesome:</label>
+                        <input type="text" id="acc-icon-input" placeholder="fa-brands fa-youtube" class="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 focus:border-amber-500 rounded-xl text-xs text-white focus:outline-none text-left" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-300 mb-1">لون التوهج والأيقونة:</label>
+                        <input type="color" id="acc-color-input" value="#D4AF37" class="w-full h-9 p-1 bg-zinc-950 border border-zinc-800 rounded-xl cursor-pointer">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 pt-2">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-300">
+                        <input type="checkbox" id="acc-pinned-input" class="rounded bg-zinc-950 border-zinc-700 text-amber-500 focus:ring-amber-500">
+                        <span class="font-bold">تثبيت في المقدمة 📌</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-300">
+                        <input type="checkbox" id="acc-active-input" checked class="rounded bg-zinc-950 border-zinc-700 text-emerald-500 focus:ring-emerald-500">
+                        <span class="font-bold">حساب نشط (معروض) 🟢</span>
+                    </label>
+                </div>
+
+                <div class="pt-3 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeAccountEditorModal()" class="px-4 py-2.5 rounded-xl bg-zinc-800 text-zinc-300 hover:text-white text-xs font-bold">
+                        إلغاء
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black text-xs font-black shadow-lg shadow-amber-500/20 hover:scale-105 transition-all">
+                        حفظ القناة 🚀
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-platform-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-700/80 rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center relative overflow-hidden">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-qrcode text-amber-400"></i> باركود ومشاركة المنصة
+                </h3>
+                <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-3 bg-zinc-950 rounded-2xl border border-amber-500/30 inline-block my-2 shadow-inner">
+                <img id="share-qr-image" src="" alt="QR Code" class="w-44 h-44 rounded-xl mx-auto">
+            </div>
+            <p class="text-xs text-zinc-400 mt-1">امسح الباركود بكاميرا الجوال للوصول المباشر للمنصة</p>
+
+            <div class="mt-4 flex items-center gap-2 bg-zinc-950 p-1.5 rounded-xl border border-zinc-800">
+                <input type="text" id="share-url-input" readonly class="bg-transparent text-xs text-zinc-300 px-2 flex-1 focus:outline-none" dir="ltr">
+                <button onclick="copyToClipboard(document.getElementById('share-url-input').value, 'تم نسخ رابط منصة أبو ندم! 📋')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-black text-xs font-bold hover:bg-amber-400 transition-colors">
+                    نسخ
+                </button>
+            </div>
+
+            <div class="mt-4 grid grid-cols-4 gap-2">
+                <button onclick="shareViaSocial('whatsapp')" class="p-2.5 rounded-xl bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 text-lg transition-all" title="واتساب">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </button>
+                <button onclick="shareViaSocial('telegram')" class="p-2.5 rounded-xl bg-blue-950/40 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 text-lg transition-all" title="تليجرام">
+                    <i class="fa-brands fa-telegram"></i>
+                </button>
+                <button onclick="shareViaSocial('twitter')" class="p-2.5 rounded-xl bg-zinc-800 text-white border border-zinc-700 hover:bg-zinc-700 text-lg transition-all" title="إكس (تويتر)">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </button>
+                <button onclick="shareViaSocial('facebook')" class="p-2.5 rounded-xl bg-indigo-950/40 text-indigo-400 border border-indigo-500/30 hover:bg-indigo-500/20 text-lg transition-all" title="فيسبوك">
+                    <i class="fa-brands fa-facebook"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-5 left-5 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full"></div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

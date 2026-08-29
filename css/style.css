@@ -1,0 +1,164 @@
+/* 
+   style.css - التنسيقات الفاخرة لمنصة أبو ندم (Luxury Royal Dark & Gold)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Cinzel:wght@600;800;900&family=Tajawal:wght@400;500;700;900&display=swap');
+
+:root {
+    --gold-primary: #D4AF37;
+    --gold-light: #FFDF73;
+    --gold-dark: #997A15;
+    --obsidian-bg: #09090C;
+    --card-bg: rgba(18, 18, 24, 0.75);
+    --card-border: rgba(212, 175, 55, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--obsidian-bg);
+    color: #F3F4F6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    direction: rtl;
+    text-align: right;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(255, 215, 0, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
+    background-attachment: fixed;
+}
+
+/* التمرير الفخم */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #09090C;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-dark);
+}
+
+/* تأثير الزجاج الفخم */
+.glass-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+}
+
+.glass-nav {
+    background: rgba(10, 10, 14, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+/* التوهج الذهبي */
+.gold-glow {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+.gold-border-glow {
+    box-shadow: 0 0 25px -5px rgba(212, 175, 55, 0.3);
+}
+
+/* النصوص المتدرجة بالذهب الملكي */
+.gold-gradient-text {
+    background: linear-gradient(135deg, #FFF6D1 0%, #F5CE62 35%, #D4AF37 70%, #AA820A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* كارت أبو ندم الفخم */
+.vip-avatar-frame {
+    position: relative;
+    padding: 4px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #FFDF73, #D4AF37, #8B6508, #FFDF73);
+    background-size: 300% 300%;
+    animation: goldRotate 6s ease infinite;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes goldRotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* وميض ونبض الشارة */
+.vip-badge-pulse {
+    animation: pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.8), 0 0 10px rgba(255, 223, 115, 0.6);
+    }
+}
+
+/* شريط الأخبار المتحرك */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: marqueeScroll 25s linear infinite;
+}
+
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* إخفاء وتلاشي المودال */
+.modal-backdrop {
+    background-color: rgba(4, 4, 6, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* تفاعل الأزرار والكروت */
+.btn-gold {
+    background: linear-gradient(135deg, #FAD961 0%, #F76B1C 100%);
+    background: linear-gradient(135deg, #FFE082 0%, #D4AF37 50%, #997A15 100%);
+    color: #0A0A0C;
+    font-weight: 800;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.btn-gold:active {
+    transform: translateY(0);
+}
