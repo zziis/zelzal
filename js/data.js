@@ -12,16 +12,16 @@ const STORAGE_KEYS = {
 const defaultPlatformData = {
     profile: {
         name: "أبو ندم | Abu Nadam",
-        tagline: "صانع محتوى وستريمر | المنصة الرسمية لكافة الحسابات والقنوات",
-        bio: "أهلاً بكم في منصتي الرسمية الموثقة. هنا تجدون كافة قنواتي وحساباتي الرسمية على منصات التواصل الاجتماعي والبث المباشر. انضموا إلينا لتكونوا جزءاً من مجتمعنا الفخم!",
-        avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80",
-        banner: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=80",
+        tagline: "صانع محتوى  | المنصة الرسمية لكافة الحسابات والقنوات",
+        bio: "أهلاً بكم في منصتي الرسمية الموثقة. هنا تجدون كافة قنواتي وحساباتي الرسمية على منصات التواصل الاجتماعي والبث المباشر. !",
+        avatar: "https://ravtwfqrqjycyzqqsutq.supabase.co/storage/v1/object/public/uploads/e3aec432-f813-4baa-ae50-cab7bcd7b50c/1788046399390-23728.png",
+        banner: "https://ravtwfqrqjycyzqqsutq.supabase.co/storage/v1/object/public/uploads/e3aec432-f813-4baa-ae50-cab7bcd7b50c/1788046399390-23728.png",
         verified: true,
         vipBadgeText: "حساب موثق VIP",
-        announcement: "🔥 ترقبوا البث المباشر القادم والمسابقات الحصرية الكبرى! اشترك الآن وفعل جرس التنبيهات في القنوات.",
+        announcement: "🔥 ترقبوا البث المباشر القادم  .",
         showAnnouncement: true,
         contactEmail: "contact@abunadam.com",
-        location: "المملكة العربية السعودية 🇸🇦",
+        location: "🫣 العراق اديالى 🫣",
         adminPin: "1234"
     },
     categories: [
@@ -33,21 +33,6 @@ const defaultPlatformData = {
         { id: "vip", name: "التواصل والخاص", icon: "fa-solid fa-crown" }
     ],
     accounts: [
-        {
-            id: "acc_1",
-            title: "قناة يوتيوب الرئيسية",
-            subtitle: "فيديوهات وتحديات حصرية ومقاطع مميزة",
-            platform: "youtube",
-            category: "video",
-            url: "https://youtube.com/@abunadam",
-            icon: "fa-brands fa-youtube",
-            themeColor: "#FF0000",
-            followers: "+500K مشترك",
-            badge: "القناة الرسمية 🔥",
-            isPinned: true,
-            clicks: 1420,
-            active: true
-        },
         {
             id: "acc_2",
             title: "قناة التليجرام VIP",
@@ -79,21 +64,6 @@ const defaultPlatformData = {
             active: true
         },
         {
-            id: "acc_4",
-            title: "سيرفر الديسكورد الرسمي",
-            subtitle: "تجمع المتابعين، رومات ألعاب وسوالف وبطولات",
-            platform: "discord",
-            category: "community",
-            url: "https://discord.gg/abunadam",
-            icon: "fa-brands fa-discord",
-            themeColor: "#5865F2",
-            followers: "+45K عضو",
-            badge: "مجتمع ألعاب 🎮",
-            isPinned: false,
-            clicks: 890,
-            active: true
-        },
-        {
             id: "acc_5",
             title: "حساب انستغرام الرسمي",
             subtitle: "يوميات، ستوريات وتصوير احترافي",
@@ -109,36 +79,6 @@ const defaultPlatformData = {
             active: true
         },
         {
-            id: "acc_6",
-            title: "منصة كيك للبث المباشر (Kick)",
-            subtitle: "بثوث ألعاب وسهرات تفاعلية ممتعة",
-            platform: "kick",
-            category: "streaming",
-            url: "https://kick.com/abunadam",
-            icon: "fa-solid fa-gamepad",
-            themeColor: "#53FC18",
-            followers: "+80K متابع",
-            badge: "بث مباشر 🟢",
-            isPinned: false,
-            clicks: 960,
-            active: true
-        },
-        {
-            id: "acc_7",
-            title: "حساب منصة إكس (Twitter / X)",
-            subtitle: "تغريدات، آراء ونقاشات يومية ومستجدات",
-            platform: "x-twitter",
-            category: "social",
-            url: "https://x.com/abunadam",
-            icon: "fa-brands fa-x-twitter",
-            themeColor: "#ffffff",
-            followers: "+190K متابع",
-            badge: "نقاشات ومستجدات 💬",
-            isPinned: false,
-            clicks: 740,
-            active: true
-        },
-        {
             id: "acc_8",
             title: "قناة واتساب الرسمية",
             subtitle: "تصلك الإشعارات والإعلانات مباشرة على هاتفك",
@@ -151,21 +91,6 @@ const defaultPlatformData = {
             badge: "إشعارات سريعة 📲",
             isPinned: false,
             clicks: 620,
-            active: true
-        },
-        {
-            id: "acc_9",
-            title: "قناة تويتش الرسمية (Twitch)",
-            subtitle: "بثوث ألعاب حماسية وتحديات وجوائز",
-            platform: "twitch",
-            category: "streaming",
-            url: "https://twitch.tv/abunadam",
-            icon: "fa-brands fa-twitch",
-            themeColor: "#9146FF",
-            followers: "+95K متابع",
-            badge: "ألعاب وجيمينج 🕹️",
-            isPinned: false,
-            clicks: 530,
             active: true
         },
         {
